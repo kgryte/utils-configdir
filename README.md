@@ -43,6 +43,12 @@ var dir = configdir();
 ```
 
 
+## Notes
+
+*	On Windows platforms, the module first checks for a `LOCALAPPDATA` [environment variable](https://en.wikipedia.org/wiki/Environment_variable#Windows) before checking for a `APPDATA` [environment variable](https://en.wikipedia.org/wiki/Environment_variable#Windows). This means that machine specific user configuration files have precedence over roaming user configuration files.
+
+
+
 ## Examples
 
 ``` javascript

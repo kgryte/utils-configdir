@@ -1,0 +1,67 @@
+#!/usr/bin/env node
+'use strict';
+
+// MODULES //
+
+var fs = require( 'fs' ),
+	path = require( 'path' ),
+	pkginfo = require( 'pkginfo' ),
+	parseArgs = require( 'minimist' ),
+	opts = require( './opts.json' ),
+	dir = require( './../lib' );
+
+
+// VARIABLES //
+
+var args,
+	pkg;
+
+
+// INIT //
+
+process.stdout.on( 'error', process.exit );
+
+
+// PACKAGE INFO //
+
+pkg = pkginfo.read( require.main );
+process.title = pkg.package.name;
+
+
+// ARGUMENTS //
+
+args = parseArgs( process.argv.slice( 2 ), opts );
+
+
+// HELP //
+
+/**
+* FUNCTION: onClose()
+*	Callback invoked upon writing a file to `stdout`.
+*
+* @private
+* @returns {Void}
+*/
+function onClose() {
+	process.exit( 0 );
+}
+
+if ( args.help ) {
+	fs.createReadStream( path.join( __dirname, 'usage.txt' ) )
+		.pipe( process.stdout )
+		.on( 'close', onClose );
+    return;
+}
+
+
+// VERSION //
+
+if ( args.version ) {
+	console.log( pkg.package.version );
+	return;
+}
+
+
+// DIR //
+
+console.log( dir() );

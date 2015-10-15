@@ -37,7 +37,7 @@ var dir = configdir( 'appname/config' );
 On non-windows platforms, if the module is unable to locate the current user's [`home`](https://github.com/kgryte/utils-homedir) directory, the module returns `null`.
 
 ``` javascript
-// When unable to resolve `home`...
+// When unable to resolve a home directory...
 var dir = configdir();
 // returns null
 ```
